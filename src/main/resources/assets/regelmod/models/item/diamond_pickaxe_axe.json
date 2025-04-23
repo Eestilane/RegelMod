@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "regelmod:item/diamond_pickaxe_axe"
+  }
+}

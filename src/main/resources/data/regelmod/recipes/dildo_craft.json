@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:stick"
+    },
+    "X": {
+      "item": "minecraft:stone"
+    }
+  },
+  "pattern": [
+    " X ",
+    " # ",
+    "###"
+  ],
+  "result": {
+    "item":"regelmod:dildo"
+  },
+  "show_notification": true
+}

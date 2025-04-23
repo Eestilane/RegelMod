@@ -1,8 +1,10 @@
 package net.eestilane.regelmod;
 
 import com.mojang.logging.LogUtils;
+import net.eestilane.regelmod.item.ModItems;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -25,8 +27,12 @@ public class RegelMod
     {
         IEventBus modEventBus = context.getModEventBus();
 
+        ModItems.register(modEventBus);
+        ModCreativeModTabs.register(modEventBus);
+
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(this::addCreative);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -38,6 +44,12 @@ public class RegelMod
     private void commonSetup(final FMLCommonSetupEvent event)
     {
 
+    }
+
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+//        if(event.getTabKey() == CreativeModeTabs.COMBAT) {
+//            event.accept(ModItems.DILDO);
+//        }
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

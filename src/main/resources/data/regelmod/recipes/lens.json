@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "#": {
+      "item": "minecraft:glass_pane"
+    },
+    "X": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "# ",
+    "X#",
+    "# "
+  ],
+  "result": {
+    "item":"regelmod:lens"
+  },
+  "show_notification": true
+}
