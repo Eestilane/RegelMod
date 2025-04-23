@@ -9,7 +9,6 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
@@ -28,7 +27,7 @@ public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
         super(pProperties);
     }
 
-    public void releaseUsing(ItemStack pItemStack, Level pLevel, Player pPlayer, LivingEntity pLivingEntity, int remainingUseTicks) {
+    public void releaseUsing(ItemStack pItemStack, Level pLevel, LivingEntity pLivingEntity, int remainingUseTicks) {
         if (pLivingEntity instanceof Player player) {
             boolean flag = player.getAbilities().instabuild;
             ItemStack itemstack = player.getProjectile(pItemStack);
@@ -42,20 +41,21 @@ public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
                     itemstack = new ItemStack(ModItems.PEBBLE.get());
                 }
 
-                float f = getPowerForTime(chargeTime);
-                if (!((double)f < 0.1D)) {
-                    boolean flag1 = player.getAbilities().instabuild || (itemstack.getItem() instanceof PebbleItem);
+                float powerForTime = getPowerForTime(chargeTime);
+                if (!((double) powerForTime < 0.1D)) {
+                    boolean flag1 = player.getAbilities().instabuild;
                     if (!pLevel.isClientSide) {
-                        PebbleItem pebbleItem = (PebbleItem) (itemstack.getItem() instanceof PebbleItem ? itemstack.getItem() : ModItems.PEBBLE.get());
-                        ThrowableItemProjectile projectile = pebbleItem.createPebble(pLevel, itemstack, player);
-                        projectile.shootFromRotation(pPlayer, pPlayer.getXRot(), pPlayer.getYRot(), 0.0F, 1.5F, 1.0F);
+                        PebbleItem pebbleItem = (PebbleItem) (itemstack.getItem() instanceof PebbleItem ? itemstack.getItem() : Items.ARROW);
+                        ThrowableItemProjectile pebble = pebbleItem.createPebble(pLevel, itemstack, player);
+                        pebble.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, powerForTime * 3.0F, 1.0F);
                         pItemStack.hurtAndBreak(1, player, (p_289501_) -> {
                             p_289501_.broadcastBreakEvent(player.getUsedItemHand());
                         });
-                        pLevel.addFreshEntity(projectile);
+
+                        pLevel.addFreshEntity(pebble);
                     }
 
-                    pLevel.playSound((Player)null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F);
+                    pLevel.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + powerForTime * 0.5F);
                     if (!flag1 && !player.getAbilities().instabuild) {
                         itemstack.shrink(1);
                         if (itemstack.isEmpty()) {

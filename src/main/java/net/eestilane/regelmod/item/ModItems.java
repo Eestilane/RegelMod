@@ -41,7 +41,7 @@ public class ModItems {
     public static final RegistryObject<Item> PEBBLE = ITEMS.register("pebble",
             () -> new PebbleItem(new Item.Properties()));
     public static final RegistryObject<Item> SLINGSHOT = ITEMS.register("slingshot",
-            () -> new SlingshotItem(new Item.Properties()));
+            () -> new SlingshotItem(new Item.Properties().durability(84)));
 
 }
 

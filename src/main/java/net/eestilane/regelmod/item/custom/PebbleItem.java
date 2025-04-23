@@ -19,6 +19,7 @@ public class PebbleItem extends Item {
 
     public ThrowableItemProjectile createPebble(Level pLevel, ItemStack pItemStack, LivingEntity pLivingEntity) {
         Pebble pebble = new Pebble(pLevel, pLivingEntity);
+        pebble.setItem(pItemStack);
         return pebble;
     }
 
