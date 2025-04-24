@@ -20,6 +20,7 @@ public class PebbleItem extends Item {
     public ThrowableItemProjectile createPebble(Level pLevel, ItemStack pItemStack, LivingEntity pLivingEntity) {
         Pebble pebble = new Pebble(pLevel, pLivingEntity);
         pebble.setItem(pItemStack);
+        pebble.setDamage(4.0F);
         return pebble;
     }
 
@@ -40,4 +41,5 @@ public class PebbleItem extends Item {
 
         return InteractionResultHolder.sidedSuccess(itemstack, pLevel.isClientSide());
     }
+
 }

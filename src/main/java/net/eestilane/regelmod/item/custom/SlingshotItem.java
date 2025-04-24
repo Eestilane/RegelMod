@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import java.util.function.Predicate;
 
 public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
-    public static final int MAX_DRAW_DURATION = 10;
+    public static final int MAX_DRAW_DURATION = 1200;
     public static final int DEFAULT_RANGE = 10;
 
     public static final Predicate<ItemStack> PEBBLE_ONLY = (pItemStack) -> {
@@ -45,7 +45,7 @@ public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
                 if (!((double) powerForTime < 0.1D)) {
                     boolean flag1 = player.getAbilities().instabuild;
                     if (!pLevel.isClientSide) {
-                        PebbleItem pebbleItem = (PebbleItem) (itemstack.getItem() instanceof PebbleItem ? itemstack.getItem() : Items.ARROW);
+                        PebbleItem pebbleItem = (PebbleItem) (itemstack.getItem() instanceof PebbleItem ? itemstack.getItem() : Items.SNOWBALL);
                         ThrowableItemProjectile pebble = pebbleItem.createPebble(pLevel, itemstack, player);
                         pebble.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, powerForTime * 3.0F, 1.0F);
                         pItemStack.hurtAndBreak(1, player, (p_289501_) -> {
@@ -80,7 +80,7 @@ public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
     }
 
     public int getUseDuration(ItemStack pItemStack) {
-        return 1200;
+        return MAX_DRAW_DURATION;
     }
 
     public UseAnim getUseAnimation(ItemStack pItemStack) {
@@ -107,6 +107,6 @@ public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
     }
 
     public int getDefaultProjectileRange() {
-        return 10;
+        return DEFAULT_RANGE;
     }
 }
