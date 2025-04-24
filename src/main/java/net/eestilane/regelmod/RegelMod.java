@@ -2,6 +2,7 @@ package net.eestilane.regelmod;
 
 import com.mojang.logging.LogUtils;
 import net.eestilane.regelmod.entity.ModEntityType;
+import net.eestilane.regelmod.item.ModItemModelProperties;
 import net.eestilane.regelmod.item.ModItems;
 import net.eestilane.regelmod.particle.ModParticles;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -63,5 +64,10 @@ public class RegelMod
 //        public static void registerParticleProvider(RegisterParticleProvidersEvent event) {
 //            event.registerSpriteSet(ModParticleTypes.PEBBLE_PARTICLE.get());
 //        }
+
+        @SubscribeEvent
+        public static void setupCommon(final FMLCommonSetupEvent event) {
+            event.enqueueWork(ModItemModelProperties::addItemProperties);
+        }
     }
 }

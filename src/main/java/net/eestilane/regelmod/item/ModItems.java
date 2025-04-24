@@ -30,8 +30,6 @@ public class ModItems {
             () -> new AxeItem(Tiers.DIAMOND, 7, -3.2F, new Item.Properties()));
     public static final RegistryObject<Item> DIAMOND_PICKAXE_AXE = ITEMS.register("diamond_pickaxe_axe",
             () -> new PickaxeAxeItem(Tiers.DIAMOND, 4, -2.9F, new Item.Properties()));
-    public static final RegistryObject<Item> DILDO = ITEMS.register("dildo",
-            () -> new SwordItem(ModToolTiers.SUPER_ITEM, 60, -3.5F, new Item.Properties().rarity(Rarity.EPIC)));
     public static final RegistryObject<Item> GLASS_JAR = ITEMS.register("glass_jar",
             () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> IRON_ROD = ITEMS.register("iron_rod",
@@ -43,5 +41,9 @@ public class ModItems {
     public static final RegistryObject<Item> SLINGSHOT = ITEMS.register("slingshot",
             () -> new SlingshotItem(new Item.Properties().durability(84)));
 
+    public static final RegistryObject<Item> ENCHANTED_BRANCH = ITEMS.register("enchanted_branch",
+            () -> new SwordItem(ModToolTiers.SUPER_ITEM, 59, -3.5F, new Item.Properties().rarity(Rarity.EPIC)) {
+                @Override
+                public boolean isFoil(ItemStack stack) {return true;}});
 }
 

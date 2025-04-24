@@ -19,19 +19,19 @@ public class ModCreativeModTabs {
 
     public static final RegistryObject<CreativeModeTab> REGEL_TAB = CREATIVE_MODE_TABS.register("regel_tab",
             () -> CreativeModeTab.builder()
-                    .icon(() -> new ItemStack(ModItems.DILDO.get()))
+                    .icon(() -> new ItemStack(ModItems.SLINGSHOT.get()))
                     .title(Component.translatable("creativetab.regel_tab"))
                     .displayItems((pParameters, pOutput) -> {
-                        pOutput.accept(ModItems.BLUEBERRY.get());
+                        pOutput.accept(ModItems.ENCHANTED_BRANCH.get());
                         pOutput.accept(ModItems.BRANCH.get());
-                        pOutput.accept(ModItems.DILDO.get());
+                        pOutput.accept(ModItems.SLINGSHOT.get());
+                        pOutput.accept(ModItems.PEBBLE.get());
+                        pOutput.accept(ModItems.IRON_ROD.get());
                         pOutput.accept(ModItems.DIAMOND_BATTLE_AXE.get());
                         pOutput.accept(ModItems.DIAMOND_PICKAXE_AXE.get());
-                        pOutput.accept(ModItems.GLASS_JAR.get());
-                        pOutput.accept(ModItems.IRON_ROD.get());
                         pOutput.accept(ModItems.LENS.get());
-                        pOutput.accept(ModItems.PEBBLE.get());
-                        pOutput.accept(ModItems.SLINGSHOT.get());
+                        pOutput.accept(ModItems.GLASS_JAR.get());
+                        pOutput.accept(ModItems.BLUEBERRY.get());
                     })
                     .build());
 }

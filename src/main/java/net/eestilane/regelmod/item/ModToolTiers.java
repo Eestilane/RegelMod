@@ -18,6 +18,6 @@ public class ModToolTiers {
             new ResourceLocation(RegelMod.MOD_ID, "branch"), List.of(Tiers.WOOD), List.of());
     public static final Tier SUPER_ITEM = TierSortingRegistry.registerTier(
             new ForgeTier(5, 3999, 8.0F, 0.0F, 15,
-                    ModTags.Blocks.FOR_SPECIAL_ITEMS, () -> Ingredient.of(ModItems.DILDO.get())),
+                    ModTags.Blocks.FOR_SPECIAL_ITEMS, () -> Ingredient.of(ModItems.ENCHANTED_BRANCH.get())),
             new ResourceLocation(RegelMod.MOD_ID, "super_item"), List.of(Tiers.NETHERITE), List.of());
 }

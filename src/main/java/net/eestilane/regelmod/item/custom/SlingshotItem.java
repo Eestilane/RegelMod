@@ -29,21 +29,20 @@ public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
 
     public void releaseUsing(ItemStack pItemStack, Level pLevel, LivingEntity pLivingEntity, int remainingUseTicks) {
         if (pLivingEntity instanceof Player player) {
-            boolean flag = player.getAbilities().instabuild;
+            boolean isCreative = player.getAbilities().instabuild;
             ItemStack itemstack = player.getProjectile(pItemStack);
 
             int chargeTime = this.getUseDuration(pItemStack) - remainingUseTicks;
-            chargeTime = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(pItemStack, pLevel, player, chargeTime, !itemstack.isEmpty() || flag);
+            chargeTime = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(pItemStack, pLevel, player, chargeTime, !itemstack.isEmpty() || isCreative);
             if (chargeTime < 0) return;
 
-            if (!itemstack.isEmpty() || flag) {
-                if (itemstack.isEmpty()) {
+            if (!itemstack.isEmpty() || isCreative) {
+                if (itemstack.isEmpty() | isCreative) {
                     itemstack = new ItemStack(ModItems.PEBBLE.get());
                 }
 
                 float powerForTime = getPowerForTime(chargeTime);
                 if (!((double) powerForTime < 0.1D)) {
-                    boolean flag1 = player.getAbilities().instabuild;
                     if (!pLevel.isClientSide) {
                         PebbleItem pebbleItem = (PebbleItem) (itemstack.getItem() instanceof PebbleItem ? itemstack.getItem() : Items.SNOWBALL);
                         ThrowableItemProjectile pebble = pebbleItem.createPebble(pLevel, itemstack, player);
@@ -56,7 +55,7 @@ public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
                     }
 
                     pLevel.playSound((Player) null, player.getX(), player.getY(), player.getZ(), SoundEvents.ARROW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.0F / (pLevel.getRandom().nextFloat() * 0.4F + 1.2F) + powerForTime * 0.5F);
-                    if (!flag1 && !player.getAbilities().instabuild) {
+                    if (!isCreative) {
                         itemstack.shrink(1);
                         if (itemstack.isEmpty()) {
                             player.getInventory().removeItem(itemstack);
@@ -69,14 +68,14 @@ public class SlingshotItem extends ProjectileWeaponItem implements Vanishable {
         }
     }
 
-    public static float getPowerForTime(int pPowerForTime) {
-        float f = (float) pPowerForTime / 10.0F;
-        f = (f * f + f * 2.0F) / 3.0F;
-        if (f > 1.0F) {
-            f = 1.0F;
+    public static float getPowerForTime(int power) {
+        float tension = (float) power / 10.0F;
+        tension = (tension * tension + tension * 2.0F) / 3.0F;
+        if (tension > 1.0F) {
+            tension = 1.0F;
         }
 
-        return f;
+        return tension;
     }
 
     public int getUseDuration(ItemStack pItemStack) {
