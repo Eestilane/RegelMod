@@ -5,9 +5,11 @@ import net.eestilane.regelmod.entity.ModEntityType;
 import net.eestilane.regelmod.item.ModItemModelProperties;
 import net.eestilane.regelmod.item.ModItems;
 import net.eestilane.regelmod.particle.ModParticles;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -20,13 +22,11 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 @Mod(RegelMod.MOD_ID)
-public class RegelMod
-{
+public class RegelMod {
     public static final String MOD_ID = "regelmod";
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public RegelMod(FMLJavaModLoadingContext context)
-    {
+    public RegelMod(FMLJavaModLoadingContext context) {
         IEventBus modEventBus = context.getModEventBus();
 
         ModEntityType.register(modEventBus);
@@ -52,18 +52,11 @@ public class RegelMod
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents
-    {
+    public static class ClientModEvents {
         @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
+        public static void onClientSetup(FMLClientSetupEvent event) {
             EntityRenderers.register(ModEntityType.PEBBLE.get(), ThrownItemRenderer::new);
         }
-
-//        @SubscribeEvent
-//        public static void registerParticleProvider(RegisterParticleProvidersEvent event) {
-//            event.registerSpriteSet(ModParticleTypes.PEBBLE_PARTICLE.get());
-//        }
 
         @SubscribeEvent
         public static void setupCommon(final FMLCommonSetupEvent event) {

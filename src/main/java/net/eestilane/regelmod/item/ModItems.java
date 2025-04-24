@@ -44,6 +44,9 @@ public class ModItems {
     public static final RegistryObject<Item> ENCHANTED_BRANCH = ITEMS.register("enchanted_branch",
             () -> new SwordItem(ModToolTiers.SUPER_ITEM, 59, -3.5F, new Item.Properties().rarity(Rarity.EPIC)) {
                 @Override
-                public boolean isFoil(ItemStack stack) {return true;}});
+                public boolean isFoil(ItemStack stack) {
+                    return true;
+                }
+            });
 }
 

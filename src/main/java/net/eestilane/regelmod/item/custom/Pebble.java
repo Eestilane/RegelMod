@@ -2,7 +2,6 @@ package net.eestilane.regelmod.item.custom;
 
 import net.eestilane.regelmod.entity.ModEntityType;
 import net.eestilane.regelmod.item.ModItems;
-import net.eestilane.regelmod.particle.ModParticles;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -31,22 +30,20 @@ public class Pebble extends ThrowableItemProjectile {
     }
 
     protected Item getDefaultItem() {
-        return Items.SNOWBALL;
+        return ModItems.PEBBLE.get();
     }
 
     private ParticleOptions getParticle() {
-        ItemStack itemstack = this.getItemRaw();
-        return (ParticleOptions)(itemstack.isEmpty() ? ParticleTypes.ITEM_SNOWBALL : new ItemParticleOption(ParticleTypes.ITEM, itemstack));
+        return new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(ModItems.PEBBLE.get()));
     }
 
     public void handleEntityEvent(byte eventId) {
         if (eventId == 3) {
             ParticleOptions particleoptions = this.getParticle();
-            for(int particleCount = 0; particleCount < 8; ++particleCount) {
+            for (int particleCount = 0; particleCount < 8; ++particleCount) {
                 this.level().addParticle(particleoptions, this.getX(), this.getY(), this.getZ(), 0.0D, 0.0D, 0.0D);
             }
         }
-
     }
 
     private float damage = 2.0F;
@@ -64,7 +61,7 @@ public class Pebble extends ThrowableItemProjectile {
     protected void onHit(HitResult hitResult) {
         super.onHit(hitResult);
         if (!this.level().isClientSide) {
-            this.level().broadcastEntityEvent(this, (byte)3);
+            this.level().broadcastEntityEvent(this, (byte) 3);
             this.discard();
         }
 
